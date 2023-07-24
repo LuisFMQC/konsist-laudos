@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Principal from "./Components/Inicial/Principal";
 import Login from "./Components/Login/Login";
+import Header from "./Components/Header";
 
 function App() {
   return (

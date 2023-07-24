@@ -12,7 +12,6 @@ const Login = () => {
   return (
     <section className={styles.login}>
       <div className={styles.forms}>
-        <Header />
         <Routes>
           <Route path="/" element={<LoginForm />} />
           <Route path="perdeu" element={<LoginPasswordLost />} />
