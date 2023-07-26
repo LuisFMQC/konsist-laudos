@@ -1,0 +1,18 @@
+.principal {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  /* grid-template-columns: 320px 1fr; */
+}
+
+.menus {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.exibicao {
+  display: flex;
+  flex-direction: column;
+}

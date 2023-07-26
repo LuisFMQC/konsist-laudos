@@ -1,0 +1,163 @@
+.containerMenu {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 1;
+  width: fit-content;
+  height: 100vh;
+  background: #273d37;
+  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.containerMenu > img {
+  max-width: 200px;
+  max-height: 48px;
+  margin: 40px 30px;
+}
+
+.separador {
+  align-self: center;
+  height: 1px;
+  width: 220px;
+  background: #cccccc;
+}
+
+.menu > span {
+  margin-left: -40px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  padding-left: 40px;
+}
+
+.itemMenu {
+  display: flex;
+  height: fit-content;
+  margin-bottom: 20px;
+}
+
+.itemMenu img {
+  margin-right: 12px;
+}
+
+.item {
+  text-decoration: none;
+  font-family: var(--type-second);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ededed;
+  margin: 0;
+}
+
+.selected {
+  text-decoration: none;
+  font-family: var(--type-second);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1d82c5;
+  margin: 0;
+}
+
+.item:hover {
+  cursor: pointer;
+  font-weight: 700;
+  color: #1d82c5;
+  transition: 0.2s;
+}
+
+.containerMedicos {
+  padding-top: 20px;
+  opacity: 0;
+  transform: translateY(-20%);
+  animation: aparecer 0.5s ease forwards;
+}
+
+.procurar::placeholder {
+  color: #b3b3b3;
+}
+
+.medicos {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.medico {
+  font-family: var(--type-second);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #707070;
+  margin-bottom: 12px;
+  transition: 0.3s;
+}
+
+.medico:hover,
+.medico:focus {
+  cursor: pointer;
+  color: #41bd9a;
+  font-weight: 700;
+  transform: translateX(8px);
+}
+
+.clinica {
+  margin: 0 20px 40px 20px;
+}
+
+.clinica > select {
+  width: 280px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #b3b3b3;
+  background: var(--c-1, #f7f7f7);
+  padding: 8px 16px;
+  padding-right: 0;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #707070;
+}
+
+.clinica > select:focus {
+  border-style: none;
+}
+.copyright p {
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #ccc;
+  margin-left: 40px;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .containerMenu {
+    transform: translateX(-100%);
+    transition: 0.5s;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .containerMenu {
+    transform: translateX(0);
+    transition: 0.5s;
+  }
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
