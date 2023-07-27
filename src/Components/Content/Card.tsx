@@ -8,21 +8,48 @@ interface Card {
   data: string | undefined;
   medico: string | undefined;
   tipo: string | undefined;
+  link: string | undefined;
 }
 
-const Card = ({ aguardando, img, procedimento, data, medico, tipo }: Card) => {
+const Card = ({
+  aguardando,
+  img,
+  procedimento,
+  data,
+  medico,
+  tipo,
+  link,
+}: Card) => {
   return (
-    <div className={styles.containerCard}>
-      <div className={styles.logoCard}>
-        <img src={img} alt={`ícone do status do ${tipo}`} />
-        {aguardando && <p>Aguardando Resultado</p>}
-      </div>
-      <div className={styles.infosCard}>
-        <p>{procedimento}</p>
-        <p>{data}</p>
-        <p>{medico}</p>
-      </div>
-    </div>
+    <>
+      {aguardando ? (
+        <div className={styles.containerCard}>
+          <div className={styles.logoCard}>
+            <img src={img} alt={`ícone do status do ${tipo}`} />
+            {aguardando && <p>Aguardando Resultado</p>}
+          </div>
+          <div className={styles.infosCard}>
+            <p>{procedimento}</p>
+            <p>{data}</p>
+            <p>{medico}</p>
+          </div>
+        </div>
+      ) : (
+        <a href={link}>
+          <div className={styles.containerCard}>
+            <div className={styles.logoCard}>
+              <img src={img} alt={`ícone do status do ${tipo}`} />
+              {aguardando && <p>Aguardando Resultado</p>}
+            </div>
+            <div className={styles.infosCard}>
+              <p>{procedimento}</p>
+              <p>{data}</p>
+              <p>{medico}</p>
+            </div>
+          </div>
+        </a>
+      )}
+    </>
   );
 };
 

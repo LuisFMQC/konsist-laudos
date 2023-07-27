@@ -50,6 +50,7 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
         {resultados.length > 0 ? (
           resultados.map((resultado, index) => (
             <Card
+              link={resultado?.link}
               key={index}
               procedimento={resultado?.procedimento}
               tipo={resultado?.tipo}

@@ -6,6 +6,7 @@ const data = [
     procedimento: "Espirometria",
     empresa: "Neuromaster",
     aguardando: true,
+    link: "",
   },
   {
     tipo: "resultado",
@@ -14,6 +15,7 @@ const data = [
     procedimento: "Espirometria",
     empresa: "Neuromaster",
     aguardando: true,
+    link: "",
   },
   {
     tipo: "resultado",
@@ -22,6 +24,7 @@ const data = [
     procedimento: "Holter",
     empresa: "Neuromaster",
     aguardando: false,
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "resultado",
@@ -30,6 +33,7 @@ const data = [
     procedimento: "Holter",
     empresa: "Neuromaster",
     aguardando: false,
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "resultado",
@@ -38,6 +42,7 @@ const data = [
     procedimento: "Holter",
     empresa: "Neuromaster",
     aguardando: false,
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "exame",
@@ -45,6 +50,7 @@ const data = [
     medico: "Dr. João Marcelo",
     procedimento: "",
     empresa: "Neuromaster",
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "resultado",
@@ -53,6 +59,7 @@ const data = [
     procedimento: "Doppler",
     empresa: "Clinica de Veias",
     aguardando: false,
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "atestado",
@@ -60,6 +67,7 @@ const data = [
     medico: "Dr. Luis Fernando",
     procedimento: "",
     empresa: "Neuromaster",
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "receita",
@@ -67,6 +75,7 @@ const data = [
     medico: "Dr. Luis Fernando",
     procedimento: "",
     empresa: "Clinica de Veias",
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
   {
     tipo: "relatorio",
@@ -74,6 +83,7 @@ const data = [
     medico: "Dr. André Stein",
     procedimento: "",
     empresa: "Neuromaster",
+    link: "https://konsistfiles.s3.sa-east-1.amazonaws.com/000982b4c086a3581ea091b71f393b98_ASSINADO.pdf",
   },
 ];
 
