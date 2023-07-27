@@ -1,0 +1,45 @@
+.containerCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  background: #ededed;
+  max-width: 180px;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.containerCard:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+  background: #dedede;
+}
+
+.logoCard {
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.logoCard p {
+  margin-top: 4px;
+  margin-bottom: -2px;
+  color: #707070;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.infosCard {
+  color: #707070;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}

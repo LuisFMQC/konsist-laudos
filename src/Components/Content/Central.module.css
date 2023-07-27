@@ -1,0 +1,19 @@
+.containerCards {
+  display: flex;
+  margin: 40px;
+  margin-top: 0;
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: -1px -1px 2px 0px rgba(0, 0, 0, 0.1),
+    1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 600px) {
+  .containerCards {
+    transform: translateX(-320px);
+    transition: 0.5s;
+    margin: 40px 20px;
+  }
+}

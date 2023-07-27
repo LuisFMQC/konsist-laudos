@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import ContainerCards from "./ContainerCards";
+import styles from "./Central.module.css";
 
 interface CentralProps {
   tipo: string;
@@ -9,9 +10,9 @@ interface CentralProps {
 
 const Central = ({ tipo, titulo }: CentralProps) => {
   return (
-    <>
+    <section className={styles.containerCards}>
       <ContainerCards tipo={tipo} titulo={titulo} />
-    </>
+    </section>
   );
 };
 

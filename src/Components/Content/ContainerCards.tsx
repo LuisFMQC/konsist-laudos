@@ -47,23 +47,29 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
       <h1>{titulo}</h1>
       <span></span>
       <div className={styles.containerCards}>
-        {resultados.map((resultado, index) => (
-          <Card
-            key={index}
-            procedimento={resultado?.procedimento}
-            tipo={resultado?.tipo}
-            aguardando={resultado?.aguardando}
-            img={
-              tipo === "resultado"
-                ? resultado?.aguardando
-                  ? imgAguardando
-                  : imgResultadoOk
-                : imagem
-            }
-            data={resultado?.data}
-            medico={resultado?.medico}
-          />
-        ))}
+        {resultados.length > 0 ? (
+          resultados.map((resultado, index) => (
+            <Card
+              key={index}
+              procedimento={resultado?.procedimento}
+              tipo={resultado?.tipo}
+              aguardando={resultado?.aguardando}
+              img={
+                tipo === "resultado"
+                  ? resultado?.aguardando
+                    ? imgAguardando
+                    : imgResultadoOk
+                  : imagem
+              }
+              data={resultado?.data}
+              medico={resultado?.medico}
+            />
+          ))
+        ) : (
+          <h1 className={styles.frase}>
+            Nenhum documento deste tipo encontrado para esta clínica
+          </h1>
+        )}
       </div>
     </div>
   );
