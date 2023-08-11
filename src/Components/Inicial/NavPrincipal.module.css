@@ -38,11 +38,22 @@
   margin-bottom: 20px;
 }
 
+.itemMenu:hover .img,
+.itemMenu:hover .item {
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s;
+  fill: #1d82c5;
+  color: #1d82c5;
+}
+
 .itemMenu img {
   margin-right: 12px;
 }
 
 .item {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   font-family: var(--type-second);
   font-weight: 500;
@@ -53,6 +64,8 @@
 }
 
 .selected {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   font-family: var(--type-second);
   font-weight: 600;
@@ -60,13 +73,6 @@
   line-height: 24px;
   color: #1d82c5;
   margin: 0;
-}
-
-.item:hover {
-  cursor: pointer;
-  font-weight: 700;
-  color: #1d82c5;
-  transition: 0.2s;
 }
 
 .containerMedicos {
@@ -141,10 +147,105 @@
   bottom: 40px;
 }
 
+.img {
+  margin-right: 12px;
+  height: 24px;
+  width: 24px;
+}
+
+.imgSelected {
+  margin-right: 12px;
+  fill: #1d82c5;
+  height: 24px;
+  width: 24px;
+}
+
 @media screen and (max-width: 600px) {
   .containerMenu {
-    transform: translateX(-100%);
-    transition: 0.5s;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    /* height: 60px; */
+    min-height: 0;
+    /* transform: translateX(-100%);
+    transition: 0.5s; */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .containerMenu > img {
+    display: none;
+  }
+
+  .copyright {
+    display: none;
+  }
+
+  .clinica {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 8px 0 12px 0;
+    padding-left: 0;
+    /* padding: 0 12px; */
+  }
+
+  .itemMenu {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .img {
+    margin-right: 0;
+    height: 32px;
+    width: 32px;
+  }
+
+  .imgSelected {
+    margin-right: 0;
+    fill: #1d82c5;
+    height: 32px;
+    width: 32px;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--type-second);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ededed;
+    margin: 0;
+  }
+
+  .selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--type-second);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .separador {
+    display: none;
   }
 }
 

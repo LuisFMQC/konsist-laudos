@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./NavPrincipal.module.css";
 import logo from "../../Assets/logo.png";
-import resultados from "../../Assets/resultados.svg";
-import prontuarios from "../../Assets/prontuario.svg";
-import exames from "../../Assets/exames.svg";
-import atestados from "../../Assets/atestados.svg";
-import receitas from "../../Assets/receitas.svg";
-import relatorios from "../../Assets/relatorios.svg";
+import { ReactComponent as Resultados } from "../../Assets/resultados.svg";
+import { ReactComponent as Prontuarios } from "../../Assets/prontuario.svg";
+import { ReactComponent as Exames } from "../../Assets/exames.svg";
+import { ReactComponent as Atestados } from "../../Assets/atestados.svg";
+import { ReactComponent as Receitas } from "../../Assets/receitas.svg";
+import { ReactComponent as Relatorios } from "../../Assets/relatorios.svg";
 import { Link, useLocation } from "react-router-dom";
 import clinicas from "./Clinicas";
 import { useClinicaContext } from "../../ClinicaContext";
@@ -55,18 +55,26 @@ const NavPrincipal = () => {
       <span className={styles.separador}></span>
       <nav className={styles.menu}>
         <div className={styles.itemMenu}>
-          <img src={resultados} alt="marcador da página inicial" />
           <Link
             className={
               rotaAtual.includes("/resultados") ? styles.selected : styles.item
             }
             to="/home/resultados"
           >
+            <Resultados
+              fill="white"
+              className={
+                rotaAtual.includes("/resultados")
+                  ? styles.imgSelected
+                  : styles.img
+              }
+            />
             Resultados
           </Link>
         </div>
         <div className={styles.itemMenu}>
-          <img src={exames} alt="marcador das agendas" />
+          {/* <img src={exames} alt="marcador das agendas" /> */}
+
           <Link
             className={
               rotaAtual.includes("/pedidosdeexames")
@@ -75,32 +83,54 @@ const NavPrincipal = () => {
             }
             to="/home/pedidosdeexames"
           >
-            Pedidos de Exames
+            <Exames
+              fill="white"
+              className={
+                rotaAtual.includes("/pedidosdeexames")
+                  ? styles.imgSelected
+                  : styles.img
+              }
+            />
+            Pedidos
           </Link>
         </div>
         <div className={styles.itemMenu}>
-          <img src={receitas} alt="marcador das agendas" />
           <Link
             className={
               rotaAtual.includes("/receitas") ? styles.selected : styles.item
             }
             to="/home/receitas"
           >
+            <Receitas
+              fill="white"
+              className={
+                rotaAtual.includes("/receitas")
+                  ? styles.imgSelected
+                  : styles.img
+              }
+            />
             Receitas
           </Link>
         </div>
         <div className={styles.itemMenu}>
-          <img src={relatorios} alt="marcador das agendas" />
           <Link
             className={
               rotaAtual.includes("/relatorios") ? styles.selected : styles.item
             }
             to="/home/relatorios"
           >
+            <Relatorios
+              fill="white"
+              className={
+                rotaAtual.includes("/relatorios")
+                  ? styles.imgSelected
+                  : styles.img
+              }
+            />
             Relatórios
           </Link>
         </div>
-        <div className={styles.itemMenu}>
+        {/* <div className={styles.itemMenu}>
           <img src={prontuarios} alt="marcador das agendas" />
           <Link
             className={
@@ -110,15 +140,22 @@ const NavPrincipal = () => {
           >
             Prontuários
           </Link>
-        </div>
+        </div> */}
         <div className={styles.itemMenu}>
-          <img src={atestados} alt="marcador das agendas" />
           <Link
             className={
               rotaAtual.includes("/atestados") ? styles.selected : styles.item
             }
             to="/home/atestados"
           >
+            <Atestados
+              fill="white"
+              className={
+                rotaAtual.includes("/atestados")
+                  ? styles.imgSelected
+                  : styles.img
+              }
+            />
             Atestados
           </Link>
         </div>

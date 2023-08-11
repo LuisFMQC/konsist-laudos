@@ -6,9 +6,19 @@ import login from "../../Assets/img-login.jpg";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const cpf = useForm("cpf");
+  const usuario = useForm("cpf");
   const senha = useForm("");
   const navigate = useNavigate();
+  const [tamanhoCampo, setTamanhoCampo] = React.useState(14);
+  const regex = /[a-zA-Z]/;
+
+  React.useEffect(() => {
+    if (regex.test(usuario.value)) {
+      setTamanhoCampo(100);
+    } else {
+      setTamanhoCampo(14);
+    }
+  }, [usuario]);
 
   function loginNavigate(e: any) {
     e.preventDefault();
@@ -24,11 +34,12 @@ const LoginForm = () => {
         </h1>
         <form className={styles.form} onSubmit={loginNavigate}>
           <Input
-            name="cpf"
-            type="cpf"
-            label="CPF"
-            placeholder="000.000.000-00"
-            {...cpf}
+            name="usuario"
+            type="text"
+            label="Usuário"
+            placeholder="Email ou CPF"
+            maxLength={tamanhoCampo}
+            {...usuario}
           />
           <Input
             name="senha"

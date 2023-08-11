@@ -12,8 +12,9 @@
 
 @media screen and (max-width: 600px) {
   .containerCards {
-    transform: translateX(-320px);
+    /* transform: translateX(-320px); */
     transition: 0.5s;
     margin: 40px 20px;
+    z-index: 1;
   }
 }

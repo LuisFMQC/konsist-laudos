@@ -6,6 +6,7 @@
   box-sizing: border-box;
   justify-content: space-between;
   transition: 0.5s;
+  z-index: 1000;
 }
 
 .titulo {
@@ -34,7 +35,6 @@
   top: 96px;
   /* width: 100%; */
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  z-index: 1;
   background: #dedede;
   padding: 4px 20px;
   border-radius: 5px;
@@ -128,6 +128,7 @@
   width: max-content;
   margin-right: 40px;
   margin-top: 32px;
+  z-index: 1000;
 }
 
 .mostrarMenu > img {
@@ -152,8 +153,23 @@
 
 @media screen and (max-width: 600px) {
   .header {
-    transform: translateX(-320px);
+    /* transform: translateX(-320px); */
     transition: 0.5s;
     width: 100vw;
+  }
+  .titulo {
+    margin: 20px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .titulo :nth-child(2) {
+    color: #41bd9a;
+    margin-top: 4px;
+  }
+
+  .mostrarMenu {
+    margin-right: 20px;
+    margin-top: 20px;
   }
 }

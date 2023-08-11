@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TypeItem {
-  regex: RegExp;
+  regex?: RegExp;
   message: string;
   validate?: Function;
 }
@@ -22,40 +22,47 @@ const types: Record<string, TypeItem> = {
   },
   cpf: {
     validate: (cpf: string): Boolean => {
-      cpf = cpf.replace(/[^\d]+/g, "");
+      const regex = /[a-zA-Z]/;
+      if (regex.test(cpf)) {
+        console.log("Entrou na condição de email.");
+        const regexEmail =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regexEmail.test(cpf);
+      } else {
+        cpf = cpf.replace(/[^\d]+/g, "");
 
-      if (cpf.length !== 11) {
-        return false;
+        if (cpf.length !== 11) {
+          return false;
+        }
+
+        if (/^(\d)\1+$/.test(cpf)) {
+          return false;
+        }
+
+        // Calcula o primeiro dígito verificador
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+          soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let resto = 11 - (soma % 11);
+        let digito1 = resto >= 10 ? 0 : resto;
+
+        if (parseInt(cpf.charAt(9)) !== digito1) {
+          return false;
+        }
+
+        // Calcula o segundo dígito verificador
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+          soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        resto = 11 - (soma % 11);
+        let digito2 = resto >= 10 ? 0 : resto;
+
+        return parseInt(cpf.charAt(10)) === digito2;
       }
-
-      if (/^(\d)\1+$/.test(cpf)) {
-        return false;
-      }
-
-      // Calcula o primeiro dígito verificador
-      let soma = 0;
-      for (let i = 0; i < 9; i++) {
-        soma += parseInt(cpf.charAt(i)) * (10 - i);
-      }
-      let resto = 11 - (soma % 11);
-      let digito1 = resto >= 10 ? 0 : resto;
-
-      if (parseInt(cpf.charAt(9)) !== digito1) {
-        return false;
-      }
-
-      // Calcula o segundo dígito verificador
-      soma = 0;
-      for (let i = 0; i < 10; i++) {
-        soma += parseInt(cpf.charAt(i)) * (11 - i);
-      }
-      resto = 11 - (soma % 11);
-      let digito2 = resto >= 10 ? 0 : resto;
-
-      return parseInt(cpf.charAt(10)) === digito2;
     },
-    regex: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
-    message: "CPF inválido",
+    message: "CPF ou Email inválido",
   },
 };
 
@@ -70,7 +77,11 @@ const useForm = (type: Types) => {
     if (value.length === 0) {
       setError("Preencha um valor.");
       return false;
-    } else if (types[type] && !types[type].regex.test(value)) {
+    } else if (
+      types[type] &&
+      types[type].regex &&
+      !types[type].regex?.test(value)
+    ) {
       setError(types[type].message);
     } else if (
       types[type] &&
@@ -99,8 +110,12 @@ const useForm = (type: Types) => {
       setValue(formatarTelefone(target.value));
     } else if (type === "cpf") {
       const formatarCPF = (cpf: string) => {
+        const regex = /[a-zA-z]/;
+        if (regex.test(cpf)) {
+          console.log("Entrou na verificação de email");
+          return cpf;
+        }
         cpf = cpf.replace(/\D/g, "");
-        console.log(cpf);
         return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
       };
       setValue(formatarCPF(target.value));

@@ -40,3 +40,13 @@
   width: fit-content;
   grid-column: 1/-1;
 }
+
+@media screen and (max-width: 600px) {
+  .containerCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 140px));
+    grid-column-gap: auto;
+    grid-row-gap: 12px;
+    margin: 40px 0 20px 0;
+  }
+}
