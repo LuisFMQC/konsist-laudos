@@ -24,7 +24,7 @@ const Principal = () => {
               />
               <Route
                 path="receitas"
-                element={<Central tipo="receita" titulo="Receitas" />}
+                element={<Central tipo="Receituario" titulo="Receitas" />}
               />
               <Route
                 path="relatorios"

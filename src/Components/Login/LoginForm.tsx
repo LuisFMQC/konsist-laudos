@@ -3,9 +3,11 @@ import useForm from "../Hooks/useForm";
 import Input from "../Form/Input";
 import styles from "./LoginForm.module.css";
 import login from "../../Assets/img-login.jpg";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../ClinicaContext";
 
 const LoginForm = () => {
+  const { userLogin, error, loading } = React.useContext(UserContext);
   const usuario = useForm("cpf");
   const senha = useForm("");
   const navigate = useNavigate();
@@ -22,7 +24,9 @@ const LoginForm = () => {
 
   function loginNavigate(e: any) {
     e.preventDefault();
-    navigate("/home");
+    if (usuario.validate() && senha.validate()) {
+      userLogin(usuario.value, senha.value);
+    }
   }
 
   return (

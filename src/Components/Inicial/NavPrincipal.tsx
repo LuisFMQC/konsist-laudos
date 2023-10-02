@@ -8,8 +8,7 @@ import { ReactComponent as Atestados } from "../../Assets/atestados.svg";
 import { ReactComponent as Receitas } from "../../Assets/receitas.svg";
 import { ReactComponent as Relatorios } from "../../Assets/relatorios.svg";
 import { Link, useLocation } from "react-router-dom";
-import clinicas from "./Clinicas";
-import { useClinicaContext } from "../../ClinicaContext";
+import { UserContext } from "../../ClinicaContext";
 
 interface Clinica {
   nome: string;
@@ -22,14 +21,15 @@ interface Clinicas {
 const NavPrincipal = () => {
   const location = useLocation();
   const [rotaAtual, setRotaAtual] = React.useState("");
-  const { clinica, setClinica } = useClinicaContext();
+  const { clinica, setClinica, clinicas, data } = React.useContext(UserContext);
 
   React.useEffect(() => {
     setRotaAtual(location.pathname);
   }, [location]);
 
   const handleChangeClinica = (e: any) => {
-    setClinica(e.target.value);
+    setClinica(clinicas?.find((objeto) => e.target.value === objeto.nome));
+    console.log(clinica);
   };
 
   return (
@@ -41,7 +41,7 @@ const NavPrincipal = () => {
           name="clinicas"
           id="clinicas"
           onChange={handleChangeClinica}
-          value={clinica}
+          value={clinica ? clinica.nome : ""}
         >
           <option value="">Selecione uma clínica...</option>
           {clinicas &&

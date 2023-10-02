@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./ContainerCards.module.css";
 import Card from "./Card";
-import data from "./Data";
 import imgResultadoOk from "../../Assets/resultadoCard.svg";
 import imgAguardando from "../../Assets/aguardandoResult.svg";
 import exame from "../../Assets/exame.svg";
@@ -9,7 +8,7 @@ import receita from "../../Assets/receita.svg";
 import relatorio from "../../Assets/relatorio.svg";
 import prontuario from "../../Assets/prontuario2.svg";
 import atestado from "../../Assets/atestado.svg";
-import { useClinicaContext } from "../../ClinicaContext";
+import { UserContext } from "../../ClinicaContext";
 
 interface ContainerCardsProps {
   tipo: string;
@@ -17,11 +16,12 @@ interface ContainerCardsProps {
 }
 
 const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
-  const { clinica } = useClinicaContext();
-
+  const { clinica, clinicas, data } = React.useContext(UserContext);
+  console.log(data);
   const resultados = data
-    .map((resultado) => {
-      if (clinica === resultado.empresa) {
+
+    .map((resultado: any) => {
+      if (clinica?.id === resultado.id_cliente) {
         const [ano, mes, dia] = resultado.data.split("-");
         const dataFormatada = dia + "/" + mes + "/" + ano;
         console.log(dataFormatada);
@@ -31,10 +31,11 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
       }
     })
     .filter(Boolean);
+  console.log(resultados);
 
   const escolherImagem = () => {
     if (tipo === "exame") return exame;
-    if (tipo === "receita") return receita;
+    if (tipo === "Receituario") return receita;
     if (tipo === "relatorio") return relatorio;
     if (tipo === "prontuario") return prontuario;
     if (tipo === "atestado") return atestado;
