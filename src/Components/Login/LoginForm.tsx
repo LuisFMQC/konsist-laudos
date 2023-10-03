@@ -58,6 +58,7 @@ const LoginForm = () => {
             </Link>
           </div>
           <button>Entrar</button>
+          <p>{error}</p>
         </form>
         {/* <div className={styles.links}>
       <a href="">Suporte</a>

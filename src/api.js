@@ -39,13 +39,14 @@ export function DOCS_GET(token) {
   };
 }
 
-export function USER_LOGOUT(body) {
+export function USER_LOGOUT(body, token) {
   return {
-    url: API_URL + "/usuario/login",
+    url: API_URL + "/usuario/logout",
     options: {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify(body),
     },

@@ -3,8 +3,10 @@ import styles from "./Header.module.css";
 import perfil from "../Assets/perfil.jpg";
 import sair from "../Assets/sair.svg";
 import { Link, useLocation } from "react-router-dom";
+import { UserContext } from "../ClinicaContext";
 
 const Header = () => {
+  const { userLogout } = React.useContext(UserContext);
   const location = useLocation();
   const currentRoute = location.pathname;
   const [showMenu, setShowMenu] = React.useState(false);
@@ -57,7 +59,7 @@ const Header = () => {
                 Alterar Senha
               </Link>
             </li>
-            <li className={styles.sair}>
+            <li className={styles.sair} onClick={userLogout}>
               <Link className={styles.itemSair} to="/">
                 Sair
               </Link>

@@ -19,18 +19,21 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
   const { clinica, clinicas, data } = React.useContext(UserContext);
   console.log(data);
   const resultados = data
+    ? data
 
-    .map((resultado: any) => {
-      if (clinica?.id === resultado.id_cliente) {
-        const [ano, mes, dia] = resultado.data.split("-");
-        const dataFormatada = dia + "/" + mes + "/" + ano;
-        console.log(dataFormatada);
-        return resultado.tipo === tipo
-          ? { ...resultado, data: dataFormatada }
-          : null;
-      }
-    })
-    .filter(Boolean);
+        .map((resultado: any) => {
+          if (clinica?.id === resultado.id_cliente) {
+            const regex = /(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+            const dataFormatada = resultado.data.replace(regex, "$3/$2/$1");
+
+            console.log(dataFormatada);
+            return resultado.tipo === tipo
+              ? { ...resultado, data: dataFormatada }
+              : null;
+          }
+        })
+        .filter(Boolean)
+    : "";
   console.log(resultados);
 
   const escolherImagem = () => {
@@ -48,17 +51,17 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
       <h1>{titulo}</h1>
       <span></span>
       <div className={styles.containerCards}>
-        {resultados.length > 0 ? (
+        {resultados && resultados.length > 0 ? (
           resultados.map((resultado, index) => (
             <Card
               link={resultado?.link}
               key={index}
               procedimento={resultado?.procedimento}
               tipo={resultado?.tipo}
-              aguardando={resultado?.aguardando}
+              aguardando={resultado?.aguardando_resultado}
               img={
                 tipo === "resultado"
-                  ? resultado?.aguardando
+                  ? resultado?.aguardando_resultado
                     ? imgAguardando
                     : imgResultadoOk
                   : imagem

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import { getSuggestedQuery } from "@testing-library/react";
-import { LOGIN_POST, TOKEN_VALIDATE_GET, DOCS_GET } from "./api";
+import { LOGIN_POST, TOKEN_VALIDATE_GET, DOCS_GET, USER_LOGOUT } from "./api";
 import { useNavigate } from "react-router-dom";
 
 interface UserContextData {
@@ -41,7 +41,7 @@ export const UserStorage = ({ children }: UserProviderProps) => {
   const [data, setData] = React.useState<any>();
   const [login, setLogin] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState<string | null>(null);
   const [id, setId] = React.useState();
   const [token, setToken] = React.useState<string>();
   const [clinicas, setClinicas] = React.useState();
@@ -67,7 +67,9 @@ export const UserStorage = ({ children }: UserProviderProps) => {
       const { id, message, cliente } = await tokenRes.json();
       setClinicas(cliente);
       setId(id);
-      if (!tokenRes.ok) throw new Error(`Error: ${message}`);
+      if (!tokenRes.ok) {
+        throw new Error(`Usuário ou senha incorretos!`);
+      }
       const token: string | null = tokenRes.headers.get("Authorization");
       if (token) {
         setToken(token);
@@ -84,8 +86,21 @@ export const UserStorage = ({ children }: UserProviderProps) => {
     }
   }
 
+  async function sair() {
+    if (id && token) {
+      const { url, options } = USER_LOGOUT({ id: id, token: token }, token);
+      const response = await fetch(url, options);
+      const { message } = await response.json();
+      if (!response.ok) throw new Error(`Error: ${message}`);
+      return true;
+    }
+    return true;
+  }
+
   const userLogout = React.useCallback(
     async function () {
+      const verificaSaida = sair();
+      if (!verificaSaida) throw new Error("Erro no Logout!");
       setData(null);
       setError(null);
       setLoading(false);
@@ -97,15 +112,16 @@ export const UserStorage = ({ children }: UserProviderProps) => {
 
   React.useEffect(() => {
     async function autologin() {
-      const token = window.localStorage.getItem("token");
-      if (token) {
+      const tokenCache = window.localStorage.getItem("token");
+      if (tokenCache) {
         try {
           setError(null);
           setLoading(true);
-          const { url, options } = TOKEN_VALIDATE_GET(token);
+          const { url, options } = TOKEN_VALIDATE_GET(tokenCache);
           const response = await fetch(url, options);
+          console.log(response);
           if (!response.ok) throw new Error("Token Inválido");
-          await getUser(token);
+          await getUser(tokenCache);
         } catch (err) {
           userLogout();
         } finally {
