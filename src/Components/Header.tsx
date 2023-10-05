@@ -60,9 +60,7 @@ const Header = () => {
               </Link>
             </li>
             <li className={styles.sair} onClick={userLogout}>
-              <Link className={styles.itemSair} to="/">
-                Sair
-              </Link>
+              <p>Sair</p>
               <svg
                 width="24"
                 height="24"

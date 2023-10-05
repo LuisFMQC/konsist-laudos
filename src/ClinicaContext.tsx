@@ -23,8 +23,10 @@ interface UserContextData {
       { id: number; nome: string; contato: string } | undefined
     >
   >;
+  token: string | undefined;
   userLogout: () => Promise<void>;
   userLogin: (username: string, password: string) => Promise<void>;
+  getUser: (token: string) => Promise<void>;
 }
 
 interface UserProviderProps {
@@ -51,11 +53,20 @@ export const UserStorage = ({ children }: UserProviderProps) => {
   const navigate = useNavigate();
 
   async function getUser(token: string) {
-    const { url, options } = DOCS_GET(token);
-    const response = await fetch(url, options);
-    const json = await response.json();
-    setData(json);
-    setLogin(true);
+    try {
+      setError(null);
+      setLoading(true);
+      const { url, options } = DOCS_GET(token);
+      const response = await fetch(url, options);
+      const json = await response.json();
+      setData(json);
+      setLogin(true);
+    } catch (err: any) {
+      setError(err.message);
+      setLogin(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function userLogin(username: string, password: string) {
@@ -105,7 +116,10 @@ export const UserStorage = ({ children }: UserProviderProps) => {
       setError(null);
       setLoading(false);
       setLogin(false);
+      setClinicas(undefined);
+      setClinica(undefined);
       window.localStorage.removeItem("token");
+      navigate("/");
     },
     [navigate]
   );
@@ -119,7 +133,6 @@ export const UserStorage = ({ children }: UserProviderProps) => {
           setLoading(true);
           const { url, options } = TOKEN_VALIDATE_GET(tokenCache);
           const response = await fetch(url, options);
-          console.log(response);
           if (!response.ok) throw new Error("Token Inválido");
           await getUser(tokenCache);
         } catch (err) {
@@ -144,6 +157,8 @@ export const UserStorage = ({ children }: UserProviderProps) => {
         clinicas,
         setClinica,
         clinica,
+        getUser,
+        token,
       }}
     >
       {children}

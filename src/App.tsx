@@ -6,6 +6,8 @@ import Principal from "./Components/Inicial/Principal";
 import Login from "./Components/Login/Login";
 import Header from "./Components/Header";
 import { UserStorage } from "./ClinicaContext";
+import PDFViewer from "./Components/PDF/PdfViewer";
+import PDFViewerLoc from "./Components/PDF/PdfLocal";
 
 function App() {
   return (

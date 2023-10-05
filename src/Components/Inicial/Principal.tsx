@@ -4,6 +4,7 @@ import Header from "../Header";
 import NavPrincipal from "./NavPrincipal";
 import { Route, Routes } from "react-router-dom";
 import Central from "../Content/Central";
+import SelectClinica from "../Form/SelectClinica";
 
 const Principal = () => {
   return (
@@ -13,6 +14,7 @@ const Principal = () => {
           <NavPrincipal />
           <div className={styles.exibicao}>
             <Header />
+            <SelectClinica />
             <Routes>
               <Route
                 path="resultados"

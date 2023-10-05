@@ -93,18 +93,20 @@
   height: 100%;
 }
 
-.sair {
+.sair,
+.sair p {
   transition: 0.2s;
+  color: #be0d23;
 }
 
-.sair .itemSair,
+.sair > p,
 .sair svg path {
   transition: 0.2s;
   color: #be0d23;
 }
 
 .sair:hover > svg path,
-.sair:hover > a {
+.sair:hover > p {
   color: #762015;
   fill: #762015;
   transform: translateX(4px);

@@ -8,6 +8,7 @@ import receita from "../../Assets/receita.svg";
 import relatorio from "../../Assets/relatorio.svg";
 import prontuario from "../../Assets/prontuario2.svg";
 import atestado from "../../Assets/atestado.svg";
+import { ReactComponent as Refresh } from "../../Assets/refresh.svg";
 import { UserContext } from "../../ClinicaContext";
 
 interface ContainerCardsProps {
@@ -16,8 +17,8 @@ interface ContainerCardsProps {
 }
 
 const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
-  const { clinica, clinicas, data } = React.useContext(UserContext);
-  console.log(data);
+  const { clinica, clinicas, data, token, getUser, loading } =
+    React.useContext(UserContext);
   const resultados = data
     ? data
 
@@ -25,8 +26,6 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
           if (clinica?.id === resultado.id_cliente) {
             const regex = /(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
             const dataFormatada = resultado.data.replace(regex, "$3/$2/$1");
-
-            console.log(dataFormatada);
             return resultado.tipo === tipo
               ? { ...resultado, data: dataFormatada }
               : null;
@@ -34,7 +33,10 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
         })
         .filter(Boolean)
     : "";
-  console.log(resultados);
+
+  async function handleRefresh() {
+    if (token) getUser(token);
+  }
 
   const escolherImagem = () => {
     if (tipo === "exame") return exame;
@@ -48,7 +50,13 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
 
   return (
     <div className={styles.containerResultados}>
-      <h1>{titulo}</h1>
+      <div className={styles.containerTitulo}>
+        <h1>{titulo}</h1>
+        <Refresh
+          className={loading ? styles.loading : styles.refresh}
+          onClick={handleRefresh}
+        />
+      </div>
       <span></span>
       <div className={styles.containerCards}>
         {resultados && resultados.length > 0 ? (

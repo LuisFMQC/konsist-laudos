@@ -1,0 +1,30 @@
+.clinica {
+  display: none;
+  margin: 20px;
+}
+
+.clinica > select {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #b3b3b3;
+  background: var(--c-1, #f7f7f7);
+  padding: 8px 16px;
+  padding-right: 0;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #707070;
+}
+
+.clinica > select:focus {
+  border-style: none;
+}
+
+@media screen and (max-width: 600px) {
+  .clinica {
+    display: flex;
+  }
+}

@@ -22,12 +22,10 @@ const NavPrincipal = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [rotaAtual, setRotaAtual] = React.useState("");
-  const { clinica, setClinica, clinicas, data, userLogout } =
+  const { clinica, setClinica, clinicas, userLogout } =
     React.useContext(UserContext);
 
   React.useEffect(() => {
-    console.log(clinica);
-    console.log(clinicas);
     setRotaAtual(location.pathname);
   }, [location]);
 
@@ -36,11 +34,11 @@ const NavPrincipal = () => {
       userLogout();
       navigate("/");
     }
+    if (clinicas) setClinica(clinicas[0]);
   }, []);
 
   const handleChangeClinica = (e: any) => {
     setClinica(clinicas?.find((objeto) => e.target.value === objeto.nome));
-    console.log(clinica);
   };
 
   return (
