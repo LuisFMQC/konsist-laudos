@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../ClinicaContext";
 
 const Header = () => {
-  const { userLogout } = React.useContext(UserContext);
+  const { userLogout, nome } = React.useContext(UserContext);
   const location = useLocation();
   const currentRoute = location.pathname;
   const [showMenu, setShowMenu] = React.useState(false);
@@ -23,7 +23,7 @@ const Header = () => {
     <section className={styles.header}>
       <div className={styles.titulo}>
         <h1>Seja bem vindo</h1>
-        <h1>Luis Fernando</h1>
+        <h1>{nome}</h1>
       </div>
       <div className={styles.mostrarMenu}>
         <img

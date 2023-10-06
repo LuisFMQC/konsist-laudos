@@ -18,6 +18,7 @@ interface UserContextData {
       ]
     | undefined;
   clinica: { id: number; nome: string; contato: string } | undefined;
+  nome: string;
   setClinica: React.Dispatch<
     React.SetStateAction<
       { id: number; nome: string; contato: string } | undefined
@@ -41,6 +42,7 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserStorage = ({ children }: UserProviderProps) => {
   const [data, setData] = React.useState<any>();
+  const [nome, setNome] = React.useState<any>();
   const [login, setLogin] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -75,7 +77,8 @@ export const UserStorage = ({ children }: UserProviderProps) => {
       setLoading(true);
       const { url, options } = LOGIN_POST({ email: username, senha: password });
       const tokenRes = await fetch(url, options);
-      const { id, message, cliente } = await tokenRes.json();
+      const { id, message, cliente, nome } = await tokenRes.json();
+      setNome(nome);
       setClinicas(cliente);
       setId(id);
       if (!tokenRes.ok) {
@@ -159,6 +162,7 @@ export const UserStorage = ({ children }: UserProviderProps) => {
         clinica,
         getUser,
         token,
+        nome,
       }}
     >
       {children}
