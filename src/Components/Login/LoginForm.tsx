@@ -11,16 +11,20 @@ const LoginForm = () => {
   const usuario = useForm("cpf");
   const senha = useForm("");
   const navigate = useNavigate();
-  const [tamanhoCampo, setTamanhoCampo] = React.useState(14);
-  const regex = /[a-zA-Z]/;
+  const [tamanhoCampo, setTamanhoCampo] = React.useState(100);
+  const regex = /^[a-zA-Z@.]+$/;
 
   React.useEffect(() => {
-    if (regex.test(usuario.value)) {
+    if (
+      regex.test(usuario.value) ||
+      usuario.value === undefined ||
+      usuario.value === ""
+    ) {
       setTamanhoCampo(100);
     } else {
       setTamanhoCampo(14);
     }
-  }, [usuario]);
+  }, [usuario.value]);
 
   function loginNavigate(e: any) {
     e.preventDefault();

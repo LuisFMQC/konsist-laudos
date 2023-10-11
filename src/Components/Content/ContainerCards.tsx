@@ -10,6 +10,7 @@ import prontuario from "../../Assets/prontuario2.svg";
 import atestado from "../../Assets/atestado.svg";
 import { ReactComponent as Refresh } from "../../Assets/refresh.svg";
 import { UserContext } from "../../ClinicaContext";
+import { useLocation } from "react-router-dom";
 
 interface ContainerCardsProps {
   tipo: string;
@@ -17,6 +18,7 @@ interface ContainerCardsProps {
 }
 
 const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
+  const location = useLocation();
   const { clinica, clinicas, data, token, getUser, loading } =
     React.useContext(UserContext);
   const resultados = data
@@ -39,18 +41,31 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
   }
 
   const escolherImagem = () => {
-    if (tipo === "exame") return exame;
+    if (tipo === "Pedido de Exame") return exame;
     if (tipo === "Receituário") return receita;
-    if (tipo === "relatorio") return relatorio;
+    if (tipo === "Relatório Médico") return relatorio;
     if (tipo === "prontuario") return prontuario;
     if (tipo === "Atestado Médico") return atestado;
   };
 
   const imagem = escolherImagem();
 
+  React.useEffect(() => {
+    const element = document.querySelector(".animeLeft") as HTMLElement;
+    const element2 = document.querySelector(".animeLeft2") as HTMLElement;
+    if (element && element2) {
+      element.classList?.remove("animeLeft");
+      element2.classList?.remove("animeLeft2");
+      void element.offsetWidth;
+      void element2.offsetWidth;
+      element.classList?.add("animeLeft");
+      element2.classList?.add("animeLeft2");
+    }
+  }, [location.pathname]);
+
   return (
-    <div className={styles.containerResultados}>
-      <div className={styles.containerTitulo}>
+    <div className={`${styles.containerResultados} animeLeft`}>
+      <div className={`${styles.containerTitulo}`}>
         <h1>{titulo}</h1>
         <Refresh
           className={loading ? styles.loading : styles.refresh}
@@ -58,7 +73,7 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
         />
       </div>
       <span></span>
-      <div className={styles.containerCards}>
+      <div className={`${styles.containerCards} animeLeft2`}>
         {resultados && resultados.length > 0 ? (
           resultados.map((resultado, index) => (
             <Card
@@ -79,7 +94,7 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
             />
           ))
         ) : (
-          <h1 className={styles.frase}>
+          <h1 className={`${styles.frase} animeLeft2`}>
             Nenhum documento deste tipo encontrado para esta clínica
           </h1>
         )}

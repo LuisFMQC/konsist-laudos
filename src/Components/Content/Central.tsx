@@ -10,7 +10,7 @@ interface CentralProps {
 
 const Central = ({ tipo, titulo }: CentralProps) => {
   return (
-    <section className={styles.containerCards}>
+    <section className={`${styles.containerCards} animeLeft`}>
       <ContainerCards tipo={tipo} titulo={titulo} />
     </section>
   );

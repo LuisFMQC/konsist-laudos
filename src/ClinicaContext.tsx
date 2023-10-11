@@ -25,6 +25,7 @@ interface UserContextData {
     >
   >;
   token: string | undefined;
+  email: string | undefined;
   userLogout: () => Promise<void>;
   userLogin: (username: string, password: string) => Promise<void>;
   getUser: (token: string) => Promise<void>;
@@ -47,6 +48,7 @@ export const UserStorage = ({ children }: UserProviderProps) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [id, setId] = React.useState();
+  const [email, setEmail] = React.useState();
   const [token, setToken] = React.useState<string>();
   const [clinicas, setClinicas] = React.useState();
   const [clinica, setClinica] = React.useState<
@@ -77,10 +79,11 @@ export const UserStorage = ({ children }: UserProviderProps) => {
       setLoading(true);
       const { url, options } = LOGIN_POST({ email: username, senha: password });
       const tokenRes = await fetch(url, options);
-      const { id, message, cliente, nome } = await tokenRes.json();
+      const { id, message, cliente, nome, email } = await tokenRes.json();
       setNome(nome);
       setClinicas(cliente);
       setId(id);
+      setEmail(email);
       if (!tokenRes.ok) {
         throw new Error(`Usuário ou senha incorretos!`);
       }
@@ -163,6 +166,7 @@ export const UserStorage = ({ children }: UserProviderProps) => {
         getUser,
         token,
         nome,
+        email,
       }}
     >
       {children}

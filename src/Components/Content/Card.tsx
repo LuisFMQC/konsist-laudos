@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Card.module.css";
 import { transform } from "typescript";
+import { useLocation } from "react-router-dom";
 
 interface Card {
   aguardando: boolean | undefined;
@@ -21,6 +22,7 @@ const Card = ({
   tipo,
   link,
 }: Card) => {
+  const location = useLocation();
   const [isHovering, setIsHovering] = React.useState(false);
   // Função de manipulador de evento para o onMouseOver
   const handleMouseOver = () => {
@@ -39,11 +41,20 @@ const Card = ({
     transform: aguardando ? "none" : "",
   };
 
+  React.useEffect(() => {
+    const element = document.querySelector(".animeLeft2") as HTMLElement;
+    if (element) {
+      element.classList?.remove("animeLeft2");
+      void element.offsetWidth;
+      element.classList?.add("animeLeft2");
+    }
+  }, [location.pathname]);
+
   return (
     <>
       {aguardando ? (
         <div
-          className={styles.containerCard}
+          className={`${styles.containerCard}`}
           style={estiloDoElemento}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}

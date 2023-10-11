@@ -62,6 +62,12 @@ a {
   animation: animeLeft 1s forwards;
 }
 
+.animeLeft2 {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: animeLeft 2s forwards;
+}
+
 .animeLeftProd {
   opacity: 0;
   transform: translateX(-40px);
