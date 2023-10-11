@@ -53,7 +53,7 @@ const LoginForm = () => {
             {...senha}
           />
           <div className={styles.esqueceu}>
-            <Link className={styles.link} to="/recuperar">
+            <Link className={styles.link} to="/perdeu">
               Esqueceu sua senha?
             </Link>
           </div>

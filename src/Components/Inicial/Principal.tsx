@@ -5,6 +5,7 @@ import NavPrincipal from "./NavPrincipal";
 import { Route, Routes } from "react-router-dom";
 import Central from "../Content/Central";
 import SelectClinica from "../Form/SelectClinica";
+import PasswordChange from "../Content/PasswordChange";
 
 const Principal = () => {
   return (
@@ -22,25 +23,29 @@ const Principal = () => {
               />
               <Route
                 path="pedidosdeexames"
-                element={<Central tipo="exame" titulo="Pedidos de Exames" />}
+                element={<Central tipo="Pedido de Exame" titulo="Pedidos de Exames" />}
               />
               <Route
                 path="receitas"
-                element={<Central tipo="Receituario" titulo="Receitas" />}
+                element={<Central tipo="Receituário" titulo="Receitas" />}
               />
               <Route
                 path="relatorios"
                 element={
-                  <Central tipo="relatorio" titulo="Relatórios Médicos" />
+                  <Central tipo="Relatório Médico" titulo="Relatórios Médicos" />
                 }
               />
               <Route
                 path="atestados"
-                element={<Central tipo="atestado" titulo="Atestados" />}
+                element={<Central tipo="Atestado Médico" titulo="Atestados" />}
               />
               <Route
                 path="prontuarios"
                 element={<Central tipo="prontuario" titulo="Prontuários" />}
+              />
+              <Route
+                path="alterarsenha"
+                element={<PasswordChange />}
               />
             </Routes>
           </div>

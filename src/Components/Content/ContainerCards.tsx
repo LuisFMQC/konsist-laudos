@@ -40,10 +40,10 @@ const ContainerCards = ({ tipo, titulo }: ContainerCardsProps) => {
 
   const escolherImagem = () => {
     if (tipo === "exame") return exame;
-    if (tipo === "Receituario") return receita;
+    if (tipo === "Receituário") return receita;
     if (tipo === "relatorio") return relatorio;
     if (tipo === "prontuario") return prontuario;
-    if (tipo === "atestado") return atestado;
+    if (tipo === "Atestado Médico") return atestado;
   };
 
   const imagem = escolherImagem();

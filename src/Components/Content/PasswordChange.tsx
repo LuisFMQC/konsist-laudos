@@ -1,17 +1,13 @@
 import React from "react";
-import styles from "./LoginPasswordReset.module.css";
+import styles from "./PasswordChange.module.css";
 import Input from "../Form/Input";
 import useForm from "../Hooks/useForm";
-import { PASSWORD_RESET, USER_GET } from "../../api";
 
-const LoginPasswordReset = () => {
+const PasswordChange = () => {
   const senha = useForm("");
+  const senhaAtual = useForm("");
   const confirmaSenha = useForm("");
   const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState('');
-  const url = window.location.href;
-  const partesDaUrl = url.split('/');
-  const token = partesDaUrl[partesDaUrl.length - 1];
   const [requirementsMet, setRequirementsMet] = React.useState({
     length: false,
     uppercase: false,
@@ -33,20 +29,6 @@ const LoginPasswordReset = () => {
     });
   };
 
-  async function getUser() {
-    const {url, options} = USER_GET(token);
-    const response = await fetch(url, options);
-    const {email} = await response.json();
-    if (response.ok){
-      setEmail(email)
-      console.log('Pegou os dados')
-    }
-  }
-
-  React.useEffect(() => {
-    getUser();
-  }, [])
-
   React.useEffect(() => {
     checkRequirements(senha.value);
   }, [senha.value]);
@@ -60,10 +42,6 @@ const LoginPasswordReset = () => {
       requirementsMet.number
     ) {
       if (senha.value === confirmaSenha.value) {
-        const {url, options} = PASSWORD_RESET({email: email, senhanova: senha.value}, token);
-        const response = await fetch(url, options);
-        const json = await response.json();
-        if(response.ok) console.log(json);
       }
     }
 
@@ -73,9 +51,16 @@ const LoginPasswordReset = () => {
   return (
     <div className={styles.containerForm}>
       <h1>
-        Redefinição de senha<span className={styles.ponto}>.</span>
+        Alteração de senha<span className={styles.ponto}>.</span>
       </h1>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <Input
+          name="senhaAtual"
+          type="password"
+          label="Senha atual"
+          placeholder="Digite a sua senha atual..."
+          {...senhaAtual}
+        />
         <Input
           name="senha"
           type="password"
@@ -114,4 +99,4 @@ const LoginPasswordReset = () => {
   );
 };
 
-export default LoginPasswordReset;
+export default PasswordChange;
