@@ -2,12 +2,19 @@ import React from "react";
 import styles from "./Principal.module.css";
 import Header from "../Header";
 import NavPrincipal from "./NavPrincipal";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Central from "../Content/Central";
 import SelectClinica from "../Form/SelectClinica";
 import PasswordChange from "../Content/PasswordChange";
 
 const Principal = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    console.log(location.pathname)
+  }, [location.pathname])
+  
+
   return (
     <>
       <section className={styles.principal}>
@@ -15,7 +22,7 @@ const Principal = () => {
           <NavPrincipal />
           <div className={styles.exibicao}>
             <Header />
-            <SelectClinica />
+            {location.pathname !== "/home/alterarsenha" && <SelectClinica />}
             <Routes>
               <Route
                 path="resultados"

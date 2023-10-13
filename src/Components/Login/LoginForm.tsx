@@ -12,17 +12,15 @@ const LoginForm = () => {
   const senha = useForm("");
   const navigate = useNavigate();
   const [tamanhoCampo, setTamanhoCampo] = React.useState(100);
-  const regex = /^[a-zA-Z@.]+$/;
+  const regex = /^[0-9.-]+$/;
 
   React.useEffect(() => {
     if (
-      regex.test(usuario.value) ||
-      usuario.value === undefined ||
-      usuario.value === ""
+      regex.test(usuario.value)
     ) {
-      setTamanhoCampo(100);
-    } else {
       setTamanhoCampo(14);
+    } else if(usuario.value === "" || usuario.value === undefined || !regex.test(usuario.value)) {
+      setTamanhoCampo(100);
     }
   }, [usuario.value]);
 
