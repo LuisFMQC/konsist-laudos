@@ -30,7 +30,7 @@ const Header = () => {
         {/* {showMenu && ( */}
         <div className={`${styles.itensMenu} ${showMenu ? styles.open : ""}`}>
           <ul>
-            <li>
+            {/* <li>
               <Link
                 className={
                   currentRoute.includes("/perfil")
@@ -41,7 +41,7 @@ const Header = () => {
               >
                 Meu Perfil
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/home/alterarsenha"

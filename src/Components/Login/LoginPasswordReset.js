@@ -1,19 +1,19 @@
-import React from "react";
-import styles from "./LoginPasswordReset.module.css";
-import Input from "../Form/Input";
-import useForm from "../Hooks/useForm";
-import { PASSWORD_RESET, USER_GET } from "../../api";
-import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
+import React from 'react';
+import styles from './LoginPasswordReset.module.css';
+import Input from '../Form/Input';
+import useForm from '../Hooks/useForm';
+import { PASSWORD_RESET, USER_GET } from '../../api';
+import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 const LoginPasswordReset = () => {
-  const senha = useForm("");
-  const confirmaSenha = useForm("");
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const senha = useForm('');
+  const confirmaSenha = useForm('');
+  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const el = null;
   const url = window.location.href;
-  const partesDaUrl = url.split("/");
+  const partesDaUrl = url.split('/');
   const token = partesDaUrl[partesDaUrl.length - 1];
   const [passChanged, setPassChanged] = React.useState(false);
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const LoginPasswordReset = () => {
     const { email } = await response.json();
     if (response.ok) {
       setEmail(email);
-      console.log("Pegou os dados");
+      console.log('Pegou os dados');
     }
   }
 
@@ -67,7 +67,7 @@ const LoginPasswordReset = () => {
       if (senha.value === confirmaSenha.value) {
         const { url, options } = PASSWORD_RESET(
           { email: email, senhanova: senha.value },
-          token
+          token,
         );
         const response = await fetch(url, options);
         const json = await response.json();
@@ -82,7 +82,7 @@ const LoginPasswordReset = () => {
 
   function handleCloseModal() {
     setPassChanged(false);
-    navigate("/");
+    navigate('/');
   }
 
   return (
@@ -98,11 +98,6 @@ const LoginPasswordReset = () => {
           Senha redefinida com sucesso
           <span>.</span>
         </h2>
-        {/* <p>
-          Agradecemos o interesse em nossos produtos, para dar continuidade na
-          contratação do sistema após a leitura da proposta{" "}
-          <span>basta nos responder o e-mail</span> da proposta.
-        </p> */}
         <button onClick={() => handleCloseModal()}>Fechar</button>
       </Modal>
       <h1>
@@ -125,19 +120,19 @@ const LoginPasswordReset = () => {
         />
         <ul>
           <li>
-            {requirementsMet.length ? "✅" : "❌"} Deve conter pelo menos 8
+            {requirementsMet.length ? '✅' : '❌'} Deve conter pelo menos 8
             caracteres
           </li>
           <li>
-            {requirementsMet.uppercase ? "✅" : "❌"} Deve conter pelo menos uma
+            {requirementsMet.uppercase ? '✅' : '❌'} Deve conter pelo menos uma
             letra maiúscula
           </li>
           <li>
-            {requirementsMet.lowercase ? "✅" : "❌"} Deve conter pelo menos uma
+            {requirementsMet.lowercase ? '✅' : '❌'} Deve conter pelo menos uma
             letra minúscula
           </li>
           <li>
-            {requirementsMet.number ? "✅" : "❌"} Deve conter pelo menos um
+            {requirementsMet.number ? '✅' : '❌'} Deve conter pelo menos um
             número
           </li>
         </ul>
