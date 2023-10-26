@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Header.module.css";
-import perfil from "../Assets/perfil.jpg";
+import { ReactComponent as Settngs } from "../Assets/settings.svg";
 import sair from "../Assets/sair.svg";
 import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../ClinicaContext";
@@ -26,12 +26,7 @@ const Header = () => {
         <h1>{nome}</h1>
       </div>
       <div className={styles.mostrarMenu}>
-        <img
-          src={perfil}
-          alt="foto do perfil"
-          className={styles.itemMostrar}
-          onClick={onChangeShowMenu}
-        />
+        <Settngs className={styles.itemMostrar} onClick={onChangeShowMenu} />
         {/* {showMenu && ( */}
         <div className={`${styles.itensMenu} ${showMenu ? styles.open : ""}`}>
           <ul>
